@@ -1,26 +1,3 @@
 {
-  "blocks": {
-    "data": [
-      {
-        "name": "Hero",
-        "path": "/block-library/hero"
-      },
-      {
-        "name": "Cards",
-        "path": "/block-library/cards"
-      },
-      {
-        "name": "Carousel",
-        "path": "/block-library/carousel"
-      },
-      {
-        "name": "Columns",
-        "path": "/block-library/columns"
-      },
-      {
-        "name": "Teaser",
-        "path": "/block-library/teaser"
-      }
-    ]
-  }
+  "blocks": "/block-library/blocks"
 }
