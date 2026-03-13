@@ -1,8 +1,12 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+function isDMVideoUrl(href) {
+  return /adobeaemcloud\.com\/adobe\/assets\/.*\/play/i.test(href);
+}
+
 function isVideoUrl(href) {
   if (!href) return false;
-  return /\.(mp4|webm|mov)(\?.*)?$/i.test(href);
+  return /\.(mp4|webm|mov)(\?.*)?$/i.test(href) || isDMVideoUrl(href);
 }
 
 function createVideoBackground(videoSrc) {
@@ -11,10 +15,14 @@ function createVideoBackground(videoSrc) {
   videoEl.playsInline = true;
   videoEl.loop = true;
 
-  const sourceEl = document.createElement('source');
-  sourceEl.setAttribute('src', videoSrc);
-  sourceEl.setAttribute('type', `video/${videoSrc.split('.').pop().split('?')[0]}`);
-  videoEl.append(sourceEl);
+  if (isDMVideoUrl(videoSrc)) {
+    videoEl.src = videoSrc;
+  } else {
+    const sourceEl = document.createElement('source');
+    sourceEl.setAttribute('src', videoSrc);
+    sourceEl.setAttribute('type', `video/${videoSrc.split('.').pop().split('?')[0]}`);
+    videoEl.append(sourceEl);
+  }
 
   if (!prefersReducedMotion.matches) {
     videoEl.autoplay = true;
