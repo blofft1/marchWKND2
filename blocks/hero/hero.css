@@ -160,8 +160,13 @@
 
 /* Primary CTA */
 .hero-wrapper .button-container.cta-button a.button {
-  background-color: var(--main-accent-color);
-  border: 2px solid var(--main-accent-color);
+  background-color: #fb923c;
+  border: 2px solid #fb923c;
+  color: var(--text-light);
+  border-radius: 4px;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .hero-wrapper .button-container.cta-button a.button::after {
@@ -174,15 +179,15 @@
 }
 
 .hero-wrapper .button-container.cta-button a.button:hover {
-  background-color: rgb(255 255 255 / 10%) !important;
-  color: var(--text-light) !important;
-  border-color: var(--text-light) !important;
-  box-shadow: 0 4px 8px rgb(0 0 0 / 30%) !important;
+  background-color: #ea7c22;
+  color: var(--text-light);
+  border-color: #ea7c22;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 30%);
   transform: translateY(-1px);
 }
 
 .hero-wrapper .button-container.cta-button a.button:hover::after {
-  color: var(--text-light) !important;
+  color: var(--text-light);
   transform: translateX(2px);
 }
 
