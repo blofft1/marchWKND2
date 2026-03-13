@@ -297,6 +297,13 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "videoUrl",
+        "label": "Video URL",
+        "description": "Optional MP4/WebM video URL for background video. Leave empty to use the image instead."
       }
     ]
   },

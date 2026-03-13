@@ -4,7 +4,7 @@
 .hero-container .hero-wrapper {
   max-width: unset;
   padding: 0;
-  width: 100%; 
+  width: 100%;
 }
 
 .hero {
@@ -42,7 +42,7 @@
   height: 5px;
   margin: 20px auto 30px;
   width: 128px;
-  transition: width .4s ease-in-out;
+  transition: width 0.4s ease-in-out;
 }
 
 /* Remove underline when class applied */
@@ -63,6 +63,7 @@
   z-index: -1;
   inset: 0;
   box-sizing: border-box;
+  line-height: 0;
 }
 
 .hero img {
@@ -73,9 +74,72 @@
 }
 
 /* --------------------------
+   Hero Background Video
+--------------------------- */
+.hero.hero-video > div:first-child {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+}
+
+.hero.hero-video video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.hero .hero-video-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.hero .hero-video-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 50%);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.hero .hero-video-controls button:hover {
+  background: rgb(0 0 0 / 70%);
+}
+
+.hero .hero-video-controls button:focus {
+  outline: 2px solid var(--main-accent-color);
+  outline-offset: 2px;
+}
+
+.hero .hero-video-controls button img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* --------------------------
    Buttons
 --------------------------- */
 
+/* Accessibility - placed first to avoid descending specificity */
+.hero-wrapper .button-container a.button:focus {
+  outline: 2px solid var(--main-accent-color);
+  outline-offset: 2px;
+}
+
+/* Minimal variation */
+/* stylelint-disable-next-line no-descending-specificity */
+.hero .button-container.cta-minimal a.button::after {
+  margin-left: 4px;
+}
 
 /* Primary CTA */
 .hero-wrapper .button-container.cta-button a.button {
@@ -85,7 +149,7 @@
 
 .hero-wrapper .button-container.cta-button a.button::after {
   content: "\f105";
-  font-family: 'Font Awesome 5 Solid';
+  font-family: "Font Awesome 5 Solid", sans-serif;
   font-size: 20px;
   margin-left: 8px;
   transition: all 0.3s ease;
@@ -93,10 +157,10 @@
 }
 
 .hero-wrapper .button-container.cta-button a.button:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: rgb(255 255 255 / 10%) !important;
   color: var(--text-light) !important;
   border-color: var(--text-light) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 30%) !important;
   transform: translateY(-1px);
 }
 
@@ -106,15 +170,17 @@
 }
 
 /* Secondary CTA */
+/* stylelint-disable-next-line no-descending-specificity */
 .hero-wrapper .button-container.cta-button-secondary a.button {
   background: transparent;
   border: 2px solid var(--main-accent-color);
   color: var(--text-light);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .hero-wrapper .button-container.cta-button-secondary a.button::after {
   content: "\f105";
-  font-family: 'Font Awesome 5 Solid';
+  font-family: "Font Awesome 5 Solid", sans-serif;
   font-size: 20px;
   margin-left: 8px;
   transition: all 0.3s ease;
@@ -131,17 +197,6 @@
   transform: translateX(2px);
 }
 
-/* Accessibility */
-.hero-wrapper .button-container a.button:focus {
-  outline: 2px solid var(--main-accent-color);
-  outline-offset: 2px;
-}
-
-/* Minimal variation */
-.hero .button-container.cta-minimal a.button::after {
-  margin-left: 4px;
-}
-
 /* --------------------------
    Layout Variations
 --------------------------- */
@@ -152,20 +207,24 @@
   gap: 40px;
   padding: 0;
   min-height: auto;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 15%);
+  overflow: hidden;
 }
-
 
 .hero.image-left {
   flex-direction: row;
   justify-content: flex-start;
 }
+
 .hero.image-right {
   flex-direction: row-reverse;
   justify-content: flex-start;
 }
+
 .hero.image-top {
   flex-direction: column;
 }
+
 .hero.image-bottom {
   flex-direction: column-reverse;
 }
@@ -178,6 +237,7 @@
   padding: 60px 40px;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .hero.image-background-text-left > div {
   text-align: left;
   max-width: 600px;
@@ -192,12 +252,14 @@
   padding: 60px 40px;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .hero.image-background-text-right > div {
   text-align: left;
   max-width: 600px;
   margin: 0;
 }
 
+/* Layout picture positioning */
 .hero.image-left picture,
 .hero.image-right picture,
 .hero.image-top picture,
@@ -212,11 +274,13 @@
   width: 100%;
 }
 
+/* stylelint-disable no-descending-specificity */
 .hero.image-top picture,
 .hero.image-bottom picture {
   width: 100%;
   height: 400px;
 }
+/* stylelint-enable no-descending-specificity */
 
 /* Text align adjustments */
 .hero.image-left > div:first-child,
@@ -239,17 +303,13 @@
   padding-left: 80px;
 }
 
-picture {
-    line-height: 0;
+/* Layout text color overrides */
+.hero.image-left h1,
+.hero.image-right h1 {
+  color: var(--text-color);
+  text-shadow: unset;
 }
-/* Box shadow for layout variations */
-.hero.image-left,
-.hero.image-right,
-.hero.image-top,
-.hero.image-bottom {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-}
+
 .hero.image-left h2,
 .hero.image-left h3,
 .hero.image-left h4,
@@ -267,10 +327,6 @@ picture {
   width: 100%;
   max-width: none;
   color: var(--text-color);
-    text-shadow: unset;
-}
-.hero.image-left h1,.hero.image-right h1{
-  color: var(--text-color);
   text-shadow: unset;
 }
 
@@ -282,7 +338,7 @@ picture {
 .hero.image-background-text-left h6,
 .hero.image-background-text-left p {
   text-align: left;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
   width: 100%;
   max-width: none;
   color: var(--text-light);
@@ -301,7 +357,7 @@ picture {
 .hero.image-background-text-right h6,
 .hero.image-background-text-right p {
   text-align: left;
-  margin: 0 0 20px 0;
+  margin: 0 0 20px;
   width: 100%;
   max-width: none;
   color: var(--text-light);
@@ -325,34 +381,45 @@ picture {
 .hero.image-bottom h4,
 .hero.image-bottom h5,
 .hero.image-bottom h6,
-.hero.image-bottom p{
+.hero.image-bottom p {
   text-align: center;
   max-width: none;
   color: var(--text-color);
-    text-shadow: unset;
+  text-shadow: unset;
 }
+
 /* --------------------------
    Responsive
 --------------------------- */
 @media (width >= 900px) {
-  .hero { padding: 40px 32px; }
-  .hero-wrapper a.button { padding: 14px 28px; font-size: 18px; }
+  .hero {
+    padding: 40px 32px;
+  }
+
+  .hero-wrapper a.button {
+    padding: 14px 28px;
+    font-size: 18px;
+  }
 }
 
 @media (width < 1024px) {
-  .hero { min-height: 650px; }
-  
+  .hero {
+    min-height: 650px;
+  }
+
   .hero.image-background-text-left {
     padding: 50px 30px;
   }
-  
+
   .hero.image-background-text-right {
     padding: 50px 30px;
   }
 }
 
 @media (width < 768px) {
-  .hero { min-height: 600px; }
+  .hero {
+    min-height: 600px;
+  }
 
   .hero.image-left,
   .hero.image-right {
@@ -392,13 +459,13 @@ picture {
   .hero.image-bottom picture {
     height: 250px;
   }
-  
+
   /* Mobile adjustments for image-background-text-left */
   .hero.image-background-text-left {
     padding: 40px 20px;
     text-align: center;
   }
-  
+
   .hero.image-background-text-left h1,
   .hero.image-background-text-left h2,
   .hero.image-background-text-left h3,
@@ -408,28 +475,27 @@ picture {
   .hero.image-background-text-left p {
     text-align: center;
   }
-  
+
   .hero.image-background-text-left .button-container {
     text-align: center;
   }
-  
+
   /* Mobile adjustments for image-background-text-right */
   .hero.image-background-text-right {
     padding: 40px 20px;
     text-align: center;
   }
-  
+
   .hero.image-background-text-right h1,
   .hero.image-background-text-right h2,
   .hero.image-background-text-right h3,
   .hero.image-background-text-right h4,
   .hero.image-background-text-right h5,
   .hero.image-background-text-right h6,
-  .hero.image-background-text-right p,
-  .hero.image-background-text-right .button-container {
+  .hero.image-background-text-right p {
     text-align: left;
   }
-  
+
   .hero.image-background-text-right .button-container {
     text-align: center;
   }
@@ -454,6 +520,7 @@ picture {
   color: var(--light-color);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .hero.theme-dark .button-container a.button {
   color: var(--light-color);
   border-color: var(--light-color);
@@ -474,21 +541,33 @@ picture {
   color: var(--dark-color);
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .hero.theme-light .button-container a.button {
   color: var(--dark-color);
   border-color: var(--dark-color);
 }
 
-.hero.block.overlay div:nth-child(2),.hero.image-background-text-left div:nth-child(2),.hero.image-background-text-right div:nth-child(2) {
+/* stylelint-disable no-descending-specificity */
+
+/* Overlay text backdrop */
+.hero.block.overlay div:nth-child(2),
+.hero.image-background-text-left div:nth-child(2),
+.hero.image-background-text-right div:nth-child(2) {
   padding: 20px;
   background: rgb(0 0 0 / 50%);
 }
 
-/*button theme hero specific*/
-.hero.block.overlay .button-container.cta-link a.button,.hero.image-background-text-left .button-container.cta-link a.button,.hero.image-background-text-right .button-container.cta-link a.button {
+/* Button theme hero specific */
+.hero.block.overlay .button-container.cta-link a.button,
+.hero.image-background-text-left .button-container.cta-link a.button,
+.hero.image-background-text-right .button-container.cta-link a.button {
   color: var(--text-light);
 }
 
-.hero.block.overlay .button-container.cta-link a.button::after  ,.hero.image-background-text-left .button-container.cta-link a.button::after,.hero.image-background-text-right .button-container.cta-link a.button::after  {
+.hero.block.overlay .button-container.cta-link a.button::after,
+.hero.image-background-text-left .button-container.cta-link a.button::after,
+.hero.image-background-text-right .button-container.cta-link a.button::after {
   color: var(--text-light);
 }
+
+/* stylelint-enable no-descending-specificity */

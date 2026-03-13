@@ -1,3 +1,60 @@
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+function isVideoUrl(href) {
+  if (!href) return false;
+  return /\.(mp4|webm|mov)(\?.*)?$/i.test(href);
+}
+
+function createVideoBackground(videoSrc) {
+  const videoEl = document.createElement('video');
+  videoEl.muted = true;
+  videoEl.playsInline = true;
+  videoEl.loop = true;
+
+  const sourceEl = document.createElement('source');
+  sourceEl.setAttribute('src', videoSrc);
+  sourceEl.setAttribute('type', `video/${videoSrc.split('.').pop().split('?')[0]}`);
+  videoEl.append(sourceEl);
+
+  if (!prefersReducedMotion.matches) {
+    videoEl.autoplay = true;
+  }
+
+  return videoEl;
+}
+
+function createVideoControls(videoEl) {
+  const playIcon = `${window.hlx.codeBasePath}/icons/video-play.svg`;
+  const pauseIcon = `${window.hlx.codeBasePath}/icons/video-pause.svg`;
+
+  const controls = document.createElement('div');
+  controls.className = 'hero-video-controls';
+
+  const btn = document.createElement('button');
+  btn.setAttribute('aria-label', 'Pause background video');
+  btn.innerHTML = `<img src="${pauseIcon}" width="24" height="24" alt="">`;
+
+  if (prefersReducedMotion.matches) {
+    btn.setAttribute('aria-label', 'Play background video');
+    btn.innerHTML = `<img src="${playIcon}" width="24" height="24" alt="">`;
+  }
+
+  btn.addEventListener('click', () => {
+    if (videoEl.paused) {
+      videoEl.play();
+      btn.setAttribute('aria-label', 'Pause background video');
+      btn.innerHTML = `<img src="${pauseIcon}" width="24" height="24" alt="">`;
+    } else {
+      videoEl.pause();
+      btn.setAttribute('aria-label', 'Play background video');
+      btn.innerHTML = `<img src="${playIcon}" width="24" height="24" alt="">`;
+    }
+  });
+
+  controls.append(btn);
+  return controls;
+}
+
 /**
  *
  * @param {Element} block
@@ -12,6 +69,23 @@ export default function decorate(block) {
   const ctaStyle = block.querySelector(':scope div:nth-child(5) > div')?.textContent?.trim() || 'default';
 
   const backgroundStyle = block.querySelector(':scope div:nth-child(6) > div')?.textContent?.trim() || 'default';
+
+  // Detect video background: check if first row has a video link instead of a picture
+  const firstRow = block.querySelector(':scope > div:first-child');
+  const videoLink = firstRow?.querySelector('a[href]');
+
+  if (videoLink && isVideoUrl(videoLink.href)) {
+    block.classList.add('hero-video');
+    const videoEl = createVideoBackground(videoLink.href);
+
+    // Replace the link's parent with the video element
+    const mediaContainer = videoLink.closest('div');
+    mediaContainer.textContent = '';
+    mediaContainer.append(videoEl);
+
+    // Add play/pause controls
+    block.append(createVideoControls(videoEl));
+  }
 
   if (layoutStyle) {
     block.classList.add(`${layoutStyle}`);
