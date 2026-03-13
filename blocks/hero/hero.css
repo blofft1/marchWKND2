@@ -76,6 +76,11 @@
 /* --------------------------
    Hero Background Video
 --------------------------- */
+.hero.hero-video {
+  max-height: 700px;
+  overflow: hidden;
+}
+
 .hero.hero-video > div:first-child {
   position: absolute;
   z-index: -1;
@@ -86,6 +91,18 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
+}
+
+@media (width < 1024px) {
+  .hero.hero-video {
+    max-height: 650px;
+  }
+}
+
+@media (width < 768px) {
+  .hero.hero-video {
+    max-height: 500px;
+  }
 }
 
 .hero .hero-video-controls {

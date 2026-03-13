@@ -1,2 +1,3 @@
 helix-importer-ui
 *.min.js
+scripts/at-lsig.js
