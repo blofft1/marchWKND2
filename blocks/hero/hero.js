@@ -109,7 +109,7 @@ export default function decorate(block) {
   }
 
   // Find the button container within the hero block
-  const buttonContainer = block.querySelector('p.button-container');
+  const buttonContainer = block.querySelector('p.button-container, p.button-wrapper');
 
   if (buttonContainer) {
     // Add the CTA style class to the button container

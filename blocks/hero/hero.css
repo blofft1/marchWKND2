@@ -147,19 +147,22 @@
 --------------------------- */
 
 /* Accessibility - placed first to avoid descending specificity */
-.hero-wrapper .button-container a.button:focus {
+.hero-wrapper .button-container a.button:focus,
+.hero-wrapper .button-wrapper a.button:focus {
   outline: 2px solid var(--main-accent-color);
   outline-offset: 2px;
 }
 
 /* Minimal variation */
 /* stylelint-disable-next-line no-descending-specificity */
-.hero .button-container.cta-minimal a.button::after {
+.hero .button-container.cta-minimal a.button::after,
+.hero .button-wrapper.cta-minimal a.button::after {
   margin-left: 4px;
 }
 
 /* Primary CTA */
-.hero-wrapper .button-container.cta-button a.button {
+.hero-wrapper .button-container.cta-button a.button,
+.hero-wrapper .button-wrapper.cta-button a.button {
   background-color: #fb923c;
   border: 2px solid #fb923c;
   color: var(--text-light);
@@ -169,7 +172,8 @@
   font-weight: 600;
 }
 
-.hero-wrapper .button-container.cta-button a.button::after {
+.hero-wrapper .button-container.cta-button a.button::after,
+.hero-wrapper .button-wrapper.cta-button a.button::after {
   content: "\f105";
   font-family: "Font Awesome 5 Solid", sans-serif;
   font-size: 20px;
@@ -178,7 +182,8 @@
   color: var(--text-light);
 }
 
-.hero-wrapper .button-container.cta-button a.button:hover {
+.hero-wrapper .button-container.cta-button a.button:hover,
+.hero-wrapper .button-wrapper.cta-button a.button:hover {
   background-color: #ea7c22;
   color: var(--text-light);
   border-color: #ea7c22;
@@ -186,21 +191,23 @@
   transform: translateY(-1px);
 }
 
-.hero-wrapper .button-container.cta-button a.button:hover::after {
+.hero-wrapper .button-container.cta-button a.button:hover::after,
+.hero-wrapper .button-wrapper.cta-button a.button:hover::after {
   color: var(--text-light);
   transform: translateX(2px);
 }
 
 /* Secondary CTA */
-/* stylelint-disable-next-line no-descending-specificity */
-.hero-wrapper .button-container.cta-button-secondary a.button {
+/* stylelint-disable no-descending-specificity */
+.hero-wrapper .button-container.cta-button-secondary a.button,
+.hero-wrapper .button-wrapper.cta-button-secondary a.button {
   background: transparent;
   border: 2px solid var(--main-accent-color);
   color: var(--text-light);
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-.hero-wrapper .button-container.cta-button-secondary a.button::after {
+.hero-wrapper .button-container.cta-button-secondary a.button::after,
+.hero-wrapper .button-wrapper.cta-button-secondary a.button::after {
   content: "\f105";
   font-family: "Font Awesome 5 Solid", sans-serif;
   font-size: 20px;
@@ -209,15 +216,19 @@
   color: var(--text-light);
 }
 
-.hero-wrapper .button-container.cta-button-secondary a.button:hover {
+.hero-wrapper .button-container.cta-button-secondary a.button:hover,
+.hero-wrapper .button-wrapper.cta-button-secondary a.button:hover {
   background-color: var(--main-accent-color);
   color: var(--text-light);
 }
 
-.hero-wrapper .button-container.cta-button-secondary a.button:hover::after {
+.hero-wrapper .button-container.cta-button-secondary a.button:hover::after,
+.hero-wrapper .button-wrapper.cta-button-secondary a.button:hover::after {
   color: var(--text-dark);
   transform: translateX(2px);
 }
+
+/* stylelint-enable no-descending-specificity */
 
 /* --------------------------
    Layout Variations
@@ -366,7 +377,8 @@
   color: var(--text-light);
 }
 
-.hero.image-background-text-left .button-container {
+.hero.image-background-text-left .button-container,
+.hero.image-background-text-left .button-wrapper {
   text-align: left;
   margin-top: 30px;
 }
@@ -385,7 +397,8 @@
   color: var(--text-light);
 }
 
-.hero.image-background-text-right .button-container {
+.hero.image-background-text-right .button-container,
+.hero.image-background-text-right .button-wrapper {
   text-align: left;
   margin-top: 30px;
 }
@@ -498,7 +511,8 @@
     text-align: center;
   }
 
-  .hero.image-background-text-left .button-container {
+  .hero.image-background-text-left .button-container,
+  .hero.image-background-text-left .button-wrapper {
     text-align: center;
   }
 
@@ -518,7 +532,8 @@
     text-align: left;
   }
 
-  .hero.image-background-text-right .button-container {
+  .hero.image-background-text-right .button-container,
+  .hero.image-background-text-right .button-wrapper {
     text-align: center;
   }
 }
@@ -542,8 +557,9 @@
   color: var(--light-color);
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-.hero.theme-dark .button-container a.button {
+/* stylelint-disable no-descending-specificity */
+.hero.theme-dark .button-container a.button,
+.hero.theme-dark .button-wrapper a.button {
   color: var(--light-color);
   border-color: var(--light-color);
 }
@@ -563,11 +579,12 @@
   color: var(--dark-color);
 }
 
-/* stylelint-disable-next-line no-descending-specificity */
-.hero.theme-light .button-container a.button {
+.hero.theme-light .button-container a.button,
+.hero.theme-light .button-wrapper a.button {
   color: var(--dark-color);
   border-color: var(--dark-color);
 }
+/* stylelint-enable no-descending-specificity */
 
 /* stylelint-disable no-descending-specificity */
 
@@ -581,14 +598,20 @@
 
 /* Button theme hero specific */
 .hero.block.overlay .button-container.cta-link a.button,
+.hero.block.overlay .button-wrapper.cta-link a.button,
 .hero.image-background-text-left .button-container.cta-link a.button,
-.hero.image-background-text-right .button-container.cta-link a.button {
+.hero.image-background-text-left .button-wrapper.cta-link a.button,
+.hero.image-background-text-right .button-container.cta-link a.button,
+.hero.image-background-text-right .button-wrapper.cta-link a.button {
   color: var(--text-light);
 }
 
 .hero.block.overlay .button-container.cta-link a.button::after,
+.hero.block.overlay .button-wrapper.cta-link a.button::after,
 .hero.image-background-text-left .button-container.cta-link a.button::after,
-.hero.image-background-text-right .button-container.cta-link a.button::after {
+.hero.image-background-text-left .button-wrapper.cta-link a.button::after,
+.hero.image-background-text-right .button-container.cta-link a.button::after,
+.hero.image-background-text-right .button-wrapper.cta-link a.button::after {
   color: var(--text-light);
 }
 
